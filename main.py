@@ -6,7 +6,7 @@ import parsers
 
 point = 0
 
-BOT_TOKEN = '1439523746:AAEIIQyQr-dKzxD13nW836nWiGM42_fIwR8'
+BOT_TOKEN = ''
 
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher(bot)
