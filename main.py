@@ -36,20 +36,6 @@ async def start(message: types.Message):
                            'Привет! Выбери нужную опцию на клавиатуре, чтобы получить кино на твой вкус.',
                            reply_markup=keyboard)
 
-
-@dp.message_handler(text=["Угадай фильм"])
-async def game1(message):
-    inlinekeyboard = types.InlineKeyboardMarkup()
-    black_btn = types.InlineKeyboardButton(text='Чёрная пантера')
-    Dad_btn = types.InlineKeyboardButton(text='Здравствуй, папа, Новый год! 2')
-    two_btn = types.InlineKeyboardButton(text='Мстители')
-    DAd_btn = types.InlineKeyboardButton(text='Отцы и деды')
-    inlinekeyboard.add(black_btn, Dad_btn,
-                       two_btn, DAd_btn)
-    await bot.send_message(message.chat.id, 'Откуда цитата "Плох тот отец, что не подготовил детей к своему уходу."?', reply_markup=inlinekeyboard)
-
-
-
 @dp.message_handler(text=['Получить подборку'])
 async def send_selections(message: types.Message):
     films = parsers.get_selections()
@@ -129,4 +115,15 @@ elif point <= 30:
 else:
     otpoint = 3
 
+@dp.message_handler(text=["Угадай фильм"])
+async def game1(message):
+    inlinekeyboard = types.InlineKeyboardMarkup()
+    black_btn = types.InlineKeyboardButton(text='Чёрная пантера', point + 2)
+    Dad_btn = types.InlineKeyboardButton(text='Здравствуй, папа, Новый год! 2', point - otpoint)
+    two_btn = types.InlineKeyboardButton(text='Мстители', point - otpoint)
+    DAd_btn = types.InlineKeyboardButton(text='Отцы и деды', point - otpoint)
+    inlinekeyboard.add(black_btn, Dad_btn,
+                       two_btn, DAd_btn)
+    await bot.send_message(message.chat.id, 'Откуда цитата "Плох тот отец, что не подготовил детей к своему уходу."?', reply_markup=inlinekeyboard)
+    
 executor.start_polling(dp, skip_updates=True)
